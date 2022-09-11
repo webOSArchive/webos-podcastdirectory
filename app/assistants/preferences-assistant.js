@@ -108,7 +108,6 @@ PreferencesAssistant.prototype.showBetaFeatures = function() {
 }
 
 PreferencesAssistant.prototype.handleValueChange = function(event) {
-    Mojo.Log.error("HERE!!");
     Mojo.Log.error(event.srcElement.id + " value changed to " + event.value);
     switch (event.srcElement.id) {
         case "listThemePreference":
