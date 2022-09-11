@@ -8,9 +8,9 @@ Tested on Pre, Pre2, Veer and Touchpad. Now with Just Type search capability!
 
 Learn more about this app at: [http://podcasts.webosarchive.org](http://podcasts.webosarchive.org)
 
-Uses [Retro Podcasts](https://github.com/codepoet80/retro-podcasts) which is hosted by [webOSArchive](http://www.webosarchive.org) for the webOS community without guarantee of privacy or performance. Illegal or illicit use strictly prohibited. 
+Uses [Retro Podcasts](https://github.com/webosarchive/podcast-service) which is hosted by [webOSArchive](http://www.webosarchive.org) for the webOS community without guarantee of privacy or performance. Illegal or illicit use strictly prohibited. 
 
-You can also self-host the services, see the [instructions here](https://github.com/codepoet80/retro-podcasts/blob/main/README.md).
+You can also self-host the services, see the [instructions here](https://github.com/webosarchive/podcast-service/blob/main/README.md).
 
 ## What is This?
 

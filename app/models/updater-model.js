@@ -2,12 +2,12 @@
 Updater Model - Mojo
  Version 0.6
  Created: 2021
- Author: codepoet80
+ Author: Jon W
  License: MIT
  Description: A model to check for and get updates from App Museum II web service.
     Does not require App Museum to be installed, but does require internet access, and Preware to do the actual install.
  Source: Find the latest version of this library and clean samples of how to use it on GitHub:
-    https://github.com/codepoet80/webos-catalog-frontend/tree/main/Examples
+    https://github.com/webosarchive/webos-catalog-frontend/tree/main/Examples
 */
 
 var UpdaterModel = function() {

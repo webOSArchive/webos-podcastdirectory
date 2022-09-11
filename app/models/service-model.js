@@ -2,7 +2,7 @@
 Podcast Directory Model - Mojo
  Version 1.0
  Created: 2021
- Author: codepoet80
+ Author: Jon W
  License: MIT
  Description: A model to interact with Retro Podcast Directory service within a Mojo app.
 */
