@@ -139,7 +139,7 @@ MainAssistant.prototype.activate = function(event) {
             busy = true;
         }
         if (!busy) {
-            this.getUserRecommendations();
+            this.loadRecommendations();
         }
     }
     //Get ready for input!
@@ -210,7 +210,7 @@ MainAssistant.prototype.handleClearTap = function() {
     $("showResultsList").style.display = "none";
 
     this.enableUI();
-    this.getUserRecommendations();
+    this.loadRecommendations();
     $("txtSearch").mojo.focus();
 }
 
@@ -226,30 +226,36 @@ MainAssistant.prototype.handleListClick = function(event) {
     return false;
 }
 
-MainAssistant.prototype.getUserRecommendations = function() {
-    Mojo.Log.info("Getting User Recommendations from Sharing Service...");
+//Load curated recommendations from local file
+MainAssistant.prototype.loadRecommendations = function() {
+    Mojo.Log.info("Loading recommendations from local file...");
     this.controller.get('spinnerLoad').mojo.start();
     $("spnResultsTitle").innerHTML = "Recommended by webOS Users";
-    shareServiceModel.DoShareListRequest(function(response) {
-        this.controller.get('spinnerLoad').mojo.stop();
-        Mojo.Log.info(response);
-        try {
-            var responseObj = JSON.parse(response);
-            if (responseObj.shares) {
-                var sharedItems = [];
-                for (var i = 0; i < responseObj.shares.length; i++) {
-                    Mojo.Log.info("shared item: " + JSON.stringify(responseObj.shares[i]));
-                    if (responseObj.shares[i].content)
-                        sharedItems.push(responseObj.shares[i].content)
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", "recommended.json");
+    xmlhttp.send();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == XMLHttpRequest.DONE) {
+            this.controller.get('spinnerLoad').mojo.stop();
+            try {
+                var responseObj = JSON.parse(xmlhttp.responseText);
+                if (responseObj.shares) {
+                    var sharedItems = [];
+                    for (var i = 0; i < responseObj.shares.length; i++) {
+                        if (responseObj.shares[i].content)
+                            sharedItems.push(responseObj.shares[i].content);
+                    }
+                    if (sharedItems.length > 0) {
+                        this.updateSearchResultsList(sharedItems);
+                    }
+                } else {
+                    throw ("No items found");
                 }
-                this.updateSearchResultsList(sharedItems);
-            } else {
-                throw ("No items shared");
+            } catch (ex) {
+                Mojo.Log.warn("Recommendations could not be loaded: " + ex);
             }
-        } catch (ex) {
-            Mojo.Log.warn("Shared recommendation list was empty or could not be loaded: " + ex);
         }
-    }.bind(this));
+    }.bind(this);
 }
 
 //Send a search request to Podcast Directory

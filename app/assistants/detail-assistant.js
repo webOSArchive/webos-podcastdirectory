@@ -37,27 +37,13 @@ DetailAssistant.prototype.setup = function() {
                     items: [
                         { label: 'Back', icon: 'back', command: 'do-goBack' }
                     ]
-                },
-                {
-                    items: [
-                        { label: 'Share', submenu: "share-menu"}
-                    ]
                 }
             ]
         };
-        this.controller.setupWidget("share-menu", this.handleCommand, this.shareMenuModel);
 
     this.controller.setupWidget(Mojo.Menu.commandMenu, this.cmdMenuAttributes, this.cmdMenuModel);
 
     /* add event handlers to listen to events from widgets */
-};
-
-DetailAssistant.prototype.shareMenuModel = {
-    items: [ 
-        { label: 'Recommend', iconPath: 'images/share.png', command: 'do-share' },
-        { label: 'Copy Feed URL', iconPath: 'images/copy.png', command: 'do-copy' },
-        { label: 'Add to drPodder', iconPath: 'images/drpodder.png', command: 'do-drpodder' }
-     ]
 };
 
 DetailAssistant.prototype.activate = function(event) {
@@ -93,25 +79,6 @@ DetailAssistant.prototype.handleCommand = function(event) {
             case 'do-goBack':
                 var stageController = Mojo.Controller.stageController;
                 stageController.swapScene({ transition: Mojo.Transition.crossFade, name: "main" });
-                break;
-            case 'do-share':
-                this.controller.showAlertDialog({
-                    onChoose: function(value) {
-                        if (value == "yes") {
-                            shareServiceModel.DoShareAddRequest(JSON.stringify(appModel.LastPodcastSelected), "application/json", function(response) {
-                                if (response) {
-                                    Mojo.Controller.getAppController().showBanner({ messageText: "Podcast shared!" }, "notifications", "");
-                                }
-                            }.bind(this));
-                        }
-                    },
-                    title: "webOS Sharing Service",
-                    message: "This will share the selected podcast with all other webOS users. Do you want to proceed?",
-                    choices: [
-                        { label: "Share", value: "yes", type: "affirmative" },
-                        { label: "Cancel", value: "no", type: "negative" }
-                    ]
-                });
                 break;
             case 'do-copy':
                 if (document.activeElement.id.indexOf("txt") == 0) {

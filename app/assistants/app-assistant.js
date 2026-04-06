@@ -4,13 +4,11 @@ In the app assistant, we setup some app-wide global objects and handle different
 var appModel = null;
 var updaterModel = null;
 var serviceModel = null;
-var shareServiceModel = null;
 
 function AppAssistant() {
     appModel = new AppModel();
     updaterModel = new UpdaterModel();
     serviceModel = new ServiceModel();
-    shareServiceModel = new ShareServiceModel();
     Mojo.Additions = Additions;
 }
 

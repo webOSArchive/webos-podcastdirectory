@@ -13,7 +13,6 @@
         "scenes": "preferences",
         "source": "app/assistants/preferences-assistant.js"
     },
-    { "source": "app/models/shareservice-model.js" },
     { "source": "app-keys.js" },
     { "source": "app/models/service-model.js" },
     { "source": "app/models/updater-model.js" },
